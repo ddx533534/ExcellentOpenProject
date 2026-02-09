@@ -1,6 +1,6 @@
 pub mod data;
 
-use crate::re_svg::data::SVGConfig;
+use data::SVGConfig;
 use resvg::render;
 use resvg::tiny_skia::Pixmap;
 use resvg::usvg::fontdb::Database;

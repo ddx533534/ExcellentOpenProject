@@ -1,0 +1,12 @@
+[package]
+name = "vulkano_lab"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+name = "vulkano_lab"
+crate-type = ["cdylib"]
+
+[dependencies]
+image = "0.25.9"
+vulkano = "0.35.2"
