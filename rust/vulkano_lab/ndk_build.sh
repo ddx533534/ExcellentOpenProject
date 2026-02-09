@@ -4,7 +4,7 @@ set -eu
 
 # shellcheck disable=SC2006
 BIN_DIR=`dirname "$0"`
-ANDROID_DIR="${BIN_DIR}/../Android"
+ANDROID_DIR="${BIN_DIR}/../../Android"
 ANDROID_DIR=`realpath "$ANDROID_DIR"`
 GRADLE_PROPERTIES_FILE="${ANDROID_DIR}/gradle.properties"
 
@@ -27,4 +27,4 @@ if [ ! -d "$ANDROID_NDK_HOME" ]; then
   exit 1
 fi
 
-cargo ndk --platform 21 --target armv7-linux-androideabi --output-dir ../Android/ --no-strip build
+cargo ndk --platform 21 --target armv7-linux-androideabi --output-dir ../../Android/app/src/main/jniLibs/ --no-strip build
