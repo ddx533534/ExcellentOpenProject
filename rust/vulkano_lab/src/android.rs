@@ -1,10 +1,11 @@
+use crate::vulkano_physical_devices::{
+    collect_physical_devices, collect_physical_devices_infos, collect_devices_queues_info,
+};
 use jni::JNIEnv;
 use jni::objects::JClass;
 use jni::sys::jstring;
-use serde::{Deserialize, Serialize};
+use serde_json::json;
 use std::ffi::CString;
-use vulkano::VulkanLibrary;
-use vulkano::instance::{Instance, InstanceCreateInfo};
 
 #[unsafe(no_mangle)]
 extern "system" fn Java_com_example_vulkanoapp_jni_VulkanoLab_helloVulkano(
@@ -19,38 +20,25 @@ extern "system" fn Java_com_example_vulkanoapp_jni_VulkanoLab_helloVulkano(
     java_string.into_raw()
 }
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-struct PhysicalDeviceInfo {
-    name: String,
-    device_type: String,
-    api_version: String,
-    driver_version: String,
-}
-
 #[unsafe(no_mangle)]
 extern "system" fn Java_com_example_vulkanoapp_jni_VulkanoLab_vulkanoInfo(
     env: JNIEnv,
     _: JClass,
 ) -> jstring {
-    let library = VulkanLibrary::new().expect("Unable to load vulkan library");
-    let instance =
-        Instance::new(library, InstanceCreateInfo::default()).expect("Unable to create instance");
-    let physical_device = instance
-        .enumerate_physical_devices()
-        .expect("Unable to get physical devices")
-        .next()
-        .expect("no physical device");
+    let physical_device_info = collect_physical_devices_infos();
+    let device_queue_info = collect_devices_queues_info();
+    let phy_str = serde_json::to_string(&physical_device_info)
+        .expect("physical_device_info serde json failed");
+    let queue_str =
+        serde_json::to_string(&device_queue_info).expect("device_queue_info serde json failed");
 
-    let physical_device_info = PhysicalDeviceInfo {
-        name: format!("{:?}", physical_device.properties().device_name),
-        device_type: format!("{:?}", physical_device.properties().device_type),
-        api_version: format!("{:?}", physical_device.properties().api_version),
-        driver_version: format!("{:?}", physical_device.properties().driver_version),
-    };
-    let rust_string =
-        serde_json::to_string(&physical_device_info).expect("Failed to serialize to JSON");
+    // 使用 json! 宏来创建包含这两个字段的 JSON 对象
+    let final_json = json!({
+        "physical_device_info": serde_json::Value::String(phy_str),
+        "device_queue_info": serde_json::Value::String(queue_str),
+    }).to_string();
 
-    let c_string = CString::new(rust_string).expect("CString::new failed");
+    let c_string = CString::new(final_json).expect("CString::new failed");
     let java_string = env
         .new_string(c_string.to_str().unwrap())
         .expect("Failed to create Java string");
