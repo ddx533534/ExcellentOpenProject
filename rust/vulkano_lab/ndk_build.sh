@@ -2,9 +2,9 @@
 set -eu
 
 TARGETS=("aarch64-linux-android" "armv7-linux-androideabi" "x86_64-linux-android")
-OUTPUT_DIR="../../Android/app/src/main/jniLibs/"
+OUTPUT_DIR="../../Android/VulkanoApp/app/src/main/jniLibs/"
 BIN_DIR=$(dirname "$0")
-ANDROID_DIR="${BIN_DIR}/../../android"
+ANDROID_DIR="${BIN_DIR}/../../android/VulkanoApp"
 ANDROID_DIR=$(realpath "$ANDROID_DIR")
 GRADLE_PROPERTIES_FILE="${ANDROID_DIR}/gradle.properties"
 read_properties() {

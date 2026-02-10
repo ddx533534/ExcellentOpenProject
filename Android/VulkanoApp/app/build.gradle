@@ -41,7 +41,7 @@ android {
 
     tasks.register('buildRust', Exec) {
         description = 'Build Rust so for Android'
-        workingDir = file("../../rust/vulkano_lab/")  // 设置 Rust 项目的根目录路径
+        workingDir = file("../../../rust/vulkano_lab/")  // 设置 Rust 项目的根目录路径
         commandLine 'bash', '-c', 'chmod +x ./ndk_build.sh && ./ndk_build.sh'
     }
     tasks.configureEach { task ->
