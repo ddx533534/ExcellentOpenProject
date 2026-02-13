@@ -8,13 +8,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.vulkanoapp.jni.VulkanoLab;
 
 public class MainActivity extends AppCompatActivity {
-
     private final static String SO_NAME = "vulkano_lab";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+//        System.loadLibrary("iGraphicsCore.huawei");
         System.loadLibrary(SO_NAME);
         updateView();
     }
@@ -25,6 +25,9 @@ public class MainActivity extends AppCompatActivity {
 
         TextView content = findViewById(R.id.main_content);
         content.setText(VulkanoLab.vulkanoInfo());
+
+        TextView vulkano = findViewById(R.id.vulkano_create);
+        vulkano.setText(VulkanoLab.createVulkanoDeviceQueue());
     }
 
 }
