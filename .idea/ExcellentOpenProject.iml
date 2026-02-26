@@ -3,7 +3,10 @@
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/rust/src" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/rust/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/rust/re_svg/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rust/re_svg/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/rust/vulkano_lab/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/rust/vulkano_lab/tests" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/rust/target" />
     </content>
     <orderEntry type="inheritedJdk" />

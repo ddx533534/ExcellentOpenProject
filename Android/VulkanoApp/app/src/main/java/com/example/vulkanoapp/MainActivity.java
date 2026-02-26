@@ -23,11 +23,17 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = this.findViewById(R.id.main_title);
         textView.setText(VulkanoLab.helloVulkano());
 
-        TextView content = findViewById(R.id.main_content);
-        content.setText(VulkanoLab.vulkanoInfo());
+        textView = findViewById(R.id.main_content);
+        textView.setText(VulkanoLab.vulkanoInfo());
 
-        TextView vulkano = findViewById(R.id.vulkano_create);
-        vulkano.setText(VulkanoLab.createVulkanoDeviceQueue());
+        textView = findViewById(R.id.vulkano_create);
+        textView.setText(VulkanoLab.createVulkanoDeviceQueue());
+
+        textView = findViewById(R.id.vulkano_buffer_create);
+        textView.setText(VulkanoLab.createVulkanoBuffer());
+
+        textView = findViewById(R.id.vulkano_compute);
+        textView.setText(VulkanoLab.vulkanoCompute());
     }
 
 }

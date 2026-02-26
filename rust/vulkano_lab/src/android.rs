@@ -1,15 +1,13 @@
+use crate::vulkano_buffer::create_buffer;
 use crate::vulkano_physical_devices::{
     collect_devices_queues_info, collect_physical_devices_infos, create_device_queue,
 };
 use jni::JNIEnv;
 use jni::objects::JClass;
 use jni::sys::jstring;
-use libloading::Library;
 use serde_json::json;
-use std::env;
 use std::ffi::CString;
-use std::sync::Arc;
-use vulkano::device::{Device, Queue};
+use crate::vulkano_compute::cs::compute_operation;
 
 #[unsafe(no_mangle)]
 extern "system" fn Java_com_example_vulkanoapp_jni_VulkanoLab_helloVulkano(
@@ -55,15 +53,38 @@ extern "system" fn Java_com_example_vulkanoapp_jni_VulkanoLab_createVulkanoDevic
     env: JNIEnv,
     _: JClass,
 ) -> jstring {
-    unsafe {
-        let create_res = create_device_queue();
-        let rust_string = match create_res {
-            (_, _) => "create queue and device successful!",
-        };
-        let c_string = CString::new(rust_string).expect("CString::new failed");
-        let java_string = env
-            .new_string(c_string.to_str().unwrap())
-            .expect("Failed to create Java string");
-        java_string.into_raw()
-    }
+    let create_res = create_device_queue();
+    let rust_string = match create_res {
+        (_, _) => "create queue and device successful!",
+    };
+    let c_string = CString::new(rust_string).expect("CString::new failed");
+    let java_string = env
+        .new_string(c_string.to_str().unwrap())
+        .expect("Failed to create Java string");
+    java_string.into_raw()
+}
+
+#[unsafe(no_mangle)]
+extern "system" fn Java_com_example_vulkanoapp_jni_VulkanoLab_createVulkanoBuffer(
+    env: JNIEnv,
+    _: JClass,
+) -> jstring {
+    let create_res = create_buffer();
+    let c_string = CString::new(create_res).expect("CString::new failed");
+    let java_string = env
+        .new_string(c_string.to_str().unwrap())
+        .expect("Failed to create Java string");
+    java_string.into_raw()
+}
+#[unsafe(no_mangle)]
+extern "system" fn Java_com_example_vulkanoapp_jni_VulkanoLab_vulkanoCompute(
+    env: JNIEnv,
+    _: JClass,
+) -> jstring {
+    let create_res = compute_operation();
+    let c_string = CString::new(create_res).expect("CString::new failed");
+    let java_string = env
+        .new_string(c_string.to_str().unwrap())
+        .expect("Failed to create Java string");
+    java_string.into_raw()
 }

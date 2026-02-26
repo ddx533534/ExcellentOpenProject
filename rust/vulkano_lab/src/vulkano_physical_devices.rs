@@ -1,11 +1,10 @@
 use serde::{Deserialize, Serialize};
-use std::fmt::format;
 use std::panic::catch_unwind;
 use std::sync::Arc;
-use vulkano::VulkanLibrary;
 use vulkano::device::physical::PhysicalDevice;
 use vulkano::device::{Device, DeviceCreateInfo, Queue, QueueCreateInfo, QueueFlags};
 use vulkano::instance::{Instance, InstanceCreateInfo};
+use vulkano::VulkanLibrary;
 /// 寻找可用物理设备。
 /// 运行程序的机器可能有多个支持 Vulkan 的设备。在要求显卡执行某些操作之前，必须枚举所有支持 Vulkan 的物理设备，并选择要用于此操作的设备。
 /// 实际上，物理设备可以是独立显卡，也可以是集成显卡处理器，甚至还可以是软件实现。它基本上可以是任何能够运行 Vulkan 操作的东西。
@@ -53,8 +52,6 @@ pub fn create_device_queue() -> (Option<Arc<Device>>, Option<Arc<Queue>>) {
         Err(_) => (None, None),
     }
 }
-
-pub fn create_buffer() {}
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct PhysicalDeviceInfo {
