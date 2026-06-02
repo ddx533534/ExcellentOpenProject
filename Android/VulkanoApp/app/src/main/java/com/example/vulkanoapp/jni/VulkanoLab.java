@@ -9,4 +9,6 @@ public class VulkanoLab {
     public static native String createVulkanoBuffer();
 
     public static native String vulkanoCompute();
+
+    public static native String vulkanoCreateImage();
 }

@@ -10,7 +10,7 @@ use vulkano::sync;
 use vulkano::sync::GpuFuture;
 
 pub fn create_buffer() -> String {
-    if let (Some(device), Some(queue)) = create_device_queue() {
+    if let Ok((device, queue)) = create_device_queue() {
         // 1.创建内存缓冲区分配器
         let memory_locator = Arc::new(StandardMemoryAllocator::new_default(device.clone()));
         let source_content = 0..64;

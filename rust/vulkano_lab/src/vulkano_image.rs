@@ -15,7 +15,7 @@ use vulkano::library::VulkanLibrary;
 use vulkano::memory::allocator::{AllocationCreateInfo, StandardMemoryAllocator};
 use vulkano::sync::{GpuFuture, now};
 
-pub fn use_vulkano() {
+pub fn use_vulkano_create_image() {
     // 1.加载vulkan系统库
     let library = VulkanLibrary::new().expect("Unable to load vulkan library");
     // 2.创建vulkan实例
@@ -120,4 +120,3 @@ pub fn use_vulkano() {
     let image = ImageBuffer::<Rgba<u8>, _>::from_raw(1024, 1024, buffer_content).unwrap();
     image.save("image.png").unwrap();
 }
-

@@ -43,7 +43,7 @@ pub mod cs {
         ",
     }
     pub fn compute_operation() -> String {
-        if let (Some(device), Some(queue)) = create_device_queue() {
+        if let Ok((device, queue)) = create_device_queue() {
             let memory_locator = Arc::new(StandardMemoryAllocator::new_default(device.clone()));
             let data_iter = 0..65536u32;
             let data_buffer = Buffer::from_iter(

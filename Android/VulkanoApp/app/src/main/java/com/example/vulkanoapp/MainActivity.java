@@ -1,7 +1,14 @@
 package com.example.vulkanoapp;
 
+import static android.widget.Toast.LENGTH_LONG;
+
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.Spanned;
+import android.text.SpannedString;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -19,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         updateView();
     }
 
-    void updateView(){
+    void updateView() {
         TextView textView = this.findViewById(R.id.main_title);
         textView.setText(VulkanoLab.helloVulkano());
 
@@ -32,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
         textView = findViewById(R.id.vulkano_buffer_create);
         textView.setText(VulkanoLab.createVulkanoBuffer());
 
-        textView = findViewById(R.id.vulkano_compute);
-        textView.setText(VulkanoLab.vulkanoCompute());
+//        textView = findViewById(R.id.vulkano_compute);
+//        textView.setText(VulkanoLab.vulkanoCompute());
     }
 
 }
