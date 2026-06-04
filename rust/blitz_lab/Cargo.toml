@@ -1,0 +1,8 @@
+[package]
+name = "blitz_lab"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Completely bypass or remove the standard 'dioxus' crate
+dioxus-native = { git = "https://github.com/DioxusLabs/blitz",  rev = "e64a3d8", features = ["prelude"] }

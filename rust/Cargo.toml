@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [workspace]
-members = [
+members = ["blitz_lab",
     "re_svg",
     "vulkano_lab"
 
